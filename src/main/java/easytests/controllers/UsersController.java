@@ -3,9 +3,7 @@ package easytests.controllers;
 import easytests.entities.Area;
 import easytests.entities.Dweller;
 import easytests.mappers.AreasMapper;
-import easytests.mappers.DwellersMapper;
-import easytests.mappers.OccupationsMapper;
-import easytests.mappers.UsersMapper;
+
 
 
 import org.apache.log4j.Logger;
@@ -23,7 +21,7 @@ import java.util.List;
 @RequestMapping("/")
 public class UsersController {
 
-
+    @Autowired
     private AreasMapper areasMapper;
     private final Logger logger = Logger.getLogger(this.getClass());
 
