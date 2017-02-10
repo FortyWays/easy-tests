@@ -1,12 +1,20 @@
 package easytests.controllers;
 
-import easytests.entities.User;
+import easytests.entities.Area;
+import easytests.entities.Dweller;
+import easytests.mappers.AreasMapper;
+import easytests.mappers.DwellersMapper;
+import easytests.mappers.OccupationsMapper;
 import easytests.mappers.UsersMapper;
-import java.util.List;
+
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * @author malinink
@@ -15,13 +23,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class UsersController {
 
-    @Autowired
-    private UsersMapper usersMapper;
+
+    private AreasMapper areasMapper;
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/users")
+
     public String list(Model model) {
-        final List<User> users = this.usersMapper.readAll();
-        model.addAttribute("users", users);
+        List<Area> areas = areasMapper.FindAllAreas();
+        logger.info("Total areas=" + areas.size());
+        for (int i = 0; i < areas.size(); i++) {
+            for (int j = 0; j < areas.get(i).getHabitants().size(); j++) {
+                Dweller dweller = areas.get(i).getHabitants().get(j);
+
+                logger.info(dweller.getFirstName() + " " + dweller.getLastName() + " " + dweller.getSurname() + " lives in " + areas.get(i).getName());
+            }
+        }
+
         return "users/list";
     }
 }
