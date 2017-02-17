@@ -1,15 +1,19 @@
 package easytests.entities;
 
 /**
- * Created by fortyways on 06.02.17.
+ * @author fortyways  on 06.02.17.
  */
 public class Dweller {
+
     private Integer id;
+
     private String firstName;
+
     private String lastName;
+
     private String surname;
+
     private Area area;
-   // private Occupation occupation;
 
     public Integer getId() {
         return id;
@@ -43,11 +47,7 @@ public class Dweller {
         this.surname = surname;
     }
 
-    public Area getArea() {
-        return area;
-    }
+    public Area getArea() { return area; }
 
-    public void setArea(Area area) {
-        this.area = area;
-    }
+    public void setArea(Area area) { this.area = area; }
 }

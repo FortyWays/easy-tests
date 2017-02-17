@@ -3,16 +3,24 @@ package easytests.entities;
 import java.util.List;
 
 /**
- * Created by fortyways on 06.02.17.
+ * @author fortyways
  */
 public class Area {
+
     private Integer id;
+
     private String name;
+
     private Float xCoord;
+
     private Float yCoord;
+
     private Float width;
+
     private Float length;
+
     private List<Dweller> habitants;
+
     public void setLength(Float length) {
         this.length = length;
     }

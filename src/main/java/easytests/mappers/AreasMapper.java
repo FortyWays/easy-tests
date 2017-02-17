@@ -10,47 +10,27 @@ import org.apache.ibatis.annotations.*;
  */
 @Mapper
 public interface AreasMapper {
-
-    @Select("SELECT * FROM areas")
     @Results(value =
             {
-                    //@Result(property = "id", column = "id"),
+                    @Result(property = "id", column = "id"),
                     @Result(property = "name", column = "area_name"),
                     @Result(property = "xCoord", column = "x_coord"),
                     @Result(property = "yCoord", column = "y_coord"),
                     @Result(property = "width", column = "width"),
                     @Result(property = "length", column = "height"),
                     @Result(property = "habitants", javaType = List.class,
-                            column = "id", many = @Many(select = "findDwellers"))
+                            column = "id", many = @Many(select = "easytests.mappers.DwellersMapper.findDwellersByAreaId"))
             })
+    @Select("SELECT * FROM areas")
     List<Area> findAllAreas();
 
     @Select("SELECT * FROM areas where id=#{id}")
-    @Results(value =
-            {
-                    //@Result(property = "id", column = "id"),
-                    @Result(property = "name", column = "area_name"),
-                    @Result(property = "xCoord", column = "x_coord"),
-                    @Result(property = "yCoord", column = "y_coord"),
-                    @Result(property = "width", column = "width"),
-                    @Result(property = "length", column = "height"),
-                    @Result(property = "habitants", javaType = List.class,
-                            column = "id", many = @Many(select = "findDwellers"))
-            })
     Area findAreaById(int id);
-
-    @Select("select * from dwellers where area_id=#{id}")
-    @Results(value =
-            {@Result(property = "firstName", column = "first_name"),
-                    @Result(property = "lastName", column = "last_name"),
-                    @Result(property = "surname", column = "surname")
-                    })
-    List<Dweller> findDwellers(int id);
 
     @Insert("INSERT INTO areas(area_name, x_coord, y_coord, width, height) VALUES(#{name}, #{xCoord}, #{yCoord}," +
             " #{width}, #{length})")
     @Options(useGeneratedKeys = true, keyColumn = "id")
-    void create(Area area);
+    void insert(Area area);
 
     @Delete("DELETE FROM areas WHERE id=#{id}")
     void delete(Area area);
