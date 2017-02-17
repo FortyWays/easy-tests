@@ -47,7 +47,9 @@ public class Dweller {
         this.surname = surname;
     }
 
-    public Area getArea() { return area; }
+    public Area getArea() {
+        return area; }
 
-    public void setArea(Area area) { this.area = area; }
+    public void setArea(Area area) {
+        this.area = area; }
 }
